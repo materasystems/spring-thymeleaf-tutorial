@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Posts</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Posts</strong>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Autor</th>
+							<th>T&iacute;tulo</th>
+							<th>Data</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="post : ${posts}">
+							<td th:text="${post.id}"></td>
+							<td th:text="${post.autor}"></td>
+							<td th:text="${post.titulo}"></td>
+							<td th:text="${#dates.format(post.data, 'dd/MM/yyyy')}"></td>
+							<td>
+								<div class="btn-group pull-right">
+							   		<a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${post.id})}" >Editar</a>
+							   		<a class="delete btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${post.id})}">Excluir</a>
+							   </div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<a class="btn btn-sm btn-success" th:href="@{/add/}" >Adicionar</a>
+		</div>
+	</div>
+</body>
+</html>
